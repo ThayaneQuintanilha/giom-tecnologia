@@ -3,19 +3,19 @@
     <h1>Formulário de inscrição GIOM</h1>
     <div id="div-label">
       <label class="label-form" for="" placeholder="Digite seu nome">Nome
-        <input v-model="nome">
+        <input v-model="nome" required>
       </label>
 
       <label class="label-form" for="" placeholder="Digite seu sobrenome">Sobrenome
-        <input v-model="sobrenome">
+        <input v-model="sobrenome" required>
       </label>
 
       <label class="label-form" for="" placeholder="Digite seu e-mail">E-mail
-        <input v-model="email">
+        <input v-model="email" required>
       </label>
 
       <label class="label-form" for="" placeholder="Digite seu endereço">Endereço
-        <input v-model="endereco">
+        <input v-model="endereco" required>
       </label>
 
       <div id="btn">
@@ -63,8 +63,8 @@ export default {
   }
 
   #form {
-    width: 100vw;
-    height: 100vh;
+    width: 99.3vw;
+    height: 99vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -120,7 +120,7 @@ export default {
     flex-direction: column;
     justify-content: center;
     color: white;
-    margin: -250px 0 0 40px;
+    margin: -270px 0;
   }
   
   #div-ul ul {
@@ -128,13 +128,14 @@ export default {
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    border: 1px solid #fff;
     width: 0 auto;
     height: 40px auto;
+    margin-bottom: 50px;
   }
 
   #div-ul ul li {
-    margin: 0 20px;
     font-size: 30px;
+    border-bottom: 1px solid #fff;
+    margin: 10px;
   }
 </style>
