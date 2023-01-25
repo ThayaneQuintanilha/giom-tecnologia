@@ -3,11 +3,11 @@
     <h1>Formulário de inscrição GIOM</h1>
     <div id="div-label">
       <label class="label-form" for="" placeholder="Digite seu nome">Nome
-        <input v-model="nome" required>
+        <input v-model="name" required>
       </label>
 
       <label class="label-form" for="" placeholder="Digite seu sobrenome">Sobrenome
-        <input v-model="sobrenome" required>
+        <input v-model="lastName" required>
       </label>
 
       <label class="label-form" for="" placeholder="Digite seu e-mail">E-mail
@@ -15,7 +15,7 @@
       </label>
 
       <label class="label-form" for="" placeholder="Digite seu endereço">Endereço
-        <input v-model="endereco" required>
+        <input v-model="adress" required>
       </label>
 
       <div id="btn">
@@ -49,8 +49,19 @@ export default {
   }},
   methods: {
     handleGet () {
-      console.log('vai');
       api.get('/buscar').then(({data}) => this.itens = data).catch((error) => console.log(error));
+    },
+    handleSubmit() {
+      let data = { name: this.name, lastName: this.lastName, email: this.email, adress: this.adress }
+      console.log(data.name);
+
+      api.post('/registrar', data).then(response => {
+          console.log(response);
+      }).catch(error => {
+          console.log(error);
+      });
+
+      this.name = '', this.lastName = '', this.email = '', this.adress = ''
     },
   },
   mounted() {
