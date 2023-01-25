@@ -25,7 +25,7 @@
   </form>
   <div id="div-ul">
     <ul>
-      <li v-for="item in itens" :key="item.id">{{ item.nome }} - {{ item.sobrenome }} - {{ item.email }} - {{ item.endereco }}</li>
+      <li v-for="item in itens" :key="item.id">{{ item.nome }} | {{ item.sobrenome }} | {{ item.email }} | {{ item.endereco }}</li>
     </ul>
   </div>
 </template>
