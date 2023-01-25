@@ -26,9 +26,9 @@
   </form>
   <div id="div-ul">
     <ul>
-      <li v-for="item in itens" :key="item.id">{{ item.name }} | {{ item.lastName }} | {{ item.email }} | {{ item.adress }} 
+      <li v-for="item in itens" :key="item.idinfos">{{ item.name }} | {{ item.lastName }} | {{ item.email }} | {{ item.adress }} 
         <button class="li-button" type="button" @click="handleEdit(item)">Editar</button> 
-        <button class="li-button" type="button" @click="handleDelete(item.id)">Excluir</button>
+        <button class="li-button" type="button" @click="handleDelete(item.idinfos)">Excluir</button>
       </li>
     </ul>
   </div>
@@ -40,7 +40,6 @@ import api from '../utils/api'
 export default {
   data() {
     return {
-      id: 1,
       name: '',
       lastName: '',
       email: '',
@@ -63,6 +62,13 @@ export default {
 
       this.name = '', this.lastName = '', this.email = '', this.adress = ''
     },
+    handleDelete(id) {
+      api.delete(`/deletar/${id}`).then(response => {
+        console.log(response)
+      }).catch(error => {
+        console.log(error)
+      })
+    }
   },
   mounted() {
     this.handleGet();
