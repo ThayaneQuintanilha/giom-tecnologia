@@ -53,7 +53,7 @@ export default {
 
       axios.request({
         method: 'post',
-        url: 'http://localhost:3000/register'
+        url: 'http://localhost:3000//registrar'
         }).then(function (response) {
           console.log(response.data);
         }).catch(function (error) {

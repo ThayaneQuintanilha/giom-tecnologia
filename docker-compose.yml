@@ -1,4 +1,4 @@
-version: "3"
+version: "3.1"
 
 services:
   # Serviço que irá rodar o node
@@ -31,7 +31,6 @@ services:
     ports:
       # Expõe a porta padrão da aplicação: altere aqui caso use outra porta
       - 3000:3000
-      - 9229:9229
     # Configura as variáveis de ambiente dentro do container
     environment:
       MYSQL_USER: root
@@ -41,7 +40,7 @@ services:
       HOST: giom
     networks:
       # Conecta esse serviço com a rede que criada
-      - giom-tecnlogia
+      - giom-tecnologia
 
   # Serviço que irá rodar o banco de dados
   db:
@@ -55,11 +54,11 @@ services:
       - 3306:3306
     networks:
       # Conecta esse serviço com a rede que criada 
-      - giom-tecnlogia
+      - giom-tecnologia
 
 # Lista de redes que os containeres irão utilizar
 networks:
   # Cria a rede que conecta os serviços `db` e `node` 
-  giom-tecnlogia:
+  giom-tecnologia:
     # Específica o drive da rede
     driver: bridge

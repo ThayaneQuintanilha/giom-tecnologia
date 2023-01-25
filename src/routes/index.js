@@ -24,16 +24,16 @@ router.get('/buscar/:id', async (req, res) => {
   res.status(200).json(result);
 })
 
-router.put('/atualizar', async (req, res) => {
+router.put('/atualizar/:id', async (req, res) => {
   const { name, lastName, email, adress } = req.body;
   const { id } = req.params;
 
-  await tasksDB.update(name, lastName, email, adress);
+  await tasksDB.update(id, name, lastName, email, adress);
 
   res.status(200).json({id, name, lastName, email, adress})
 })
 
-router.delete('/deletar', async (req, res) => {
+router.delete('/deletar/:id', async (req, res) => {
   const { id } = req.params;
 
   await tasksDB.deleteFromId(id);
@@ -41,3 +41,4 @@ router.delete('/deletar', async (req, res) => {
   res.status(200).json({ message: `Você excluiu o ${id}` })
 })
 
+module.exports = router;
