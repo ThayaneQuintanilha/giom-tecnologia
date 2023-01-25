@@ -20,76 +20,41 @@
 
       <div id="btn">
         <button type="submit">Enviar</button>
+        <button class="li-button" v-if="itemEditando" type="button" @submit.prevent="handleSave(itemEditando.id)">Salvar</button>
       </div>
     </div>
   </form>
   <div id="div-ul">
     <ul>
-      <li v-for="item in itens" :key="item.id">{{ item.nome }} | {{ item.sobrenome }} | {{ item.email }} | {{ item.endereco }} 
-        <button type="button" v-for="item in itens" :key="item.id" @submit.prevent="handleEdit">Editar</button> 
-        <button type="button" v-for="item in itens" :key="item.id" @submit.prevent="handleDelete">Excluir</button></li>
+      <li v-for="item in itens" :key="item.id">{{ item.name }} | {{ item.lastName }} | {{ item.email }} | {{ item.adress }} 
+        <button class="li-button" type="button" @click="handleEdit(item)">Editar</button> 
+        <button class="li-button" type="button" @click="handleDelete(item.id)">Excluir</button>
+      </li>
     </ul>
   </div>
 </template>
 
 <script>
-const axios = require('axios');
+import api from '../utils/api'
 
 export default {
   data() {
     return {
       id: 1,
-      nome: '',
-      sobrenome: '',
+      name: '',
+      lastName: '',
       email: '',
-      endereco: '',
+      adress: '',
       itens: []
-    }
-  },
+  }},
   methods: {
-    async handleSubmit() {
-      this.itens.push({nome: this.nome, sobrenome: this.sobrenome, email: this.email, endereco: this.endereco});
-      this.nome = '', this.sobrenome = '', this.email = '', this.endereco = ''
-
-      axios.request({
-        method: 'post',
-        url: 'http://localhost:3000//registrar'
-        }).then(function (response) {
-          console.log(response.data);
-        }).catch(function (error) {
-          console.log(error);
-        });
+    handleGet () {
+      console.log('vai');
+      api.get('/buscar').then(({data}) => this.itens = data).catch((error) => console.log(error));
     },
-   async handleEdit() {
-    // let data = {nome: this.nome, sobrenome: this.sobrenome, email: this.email, endereco: this.endereco}
-
-    axios.request({
-      method: 'put',
-      url: 'http://localhost:3000/atualizar',
-      // body: data
-      }).then(function (response) {
-        console.log(response.data);
-      }).catch(function (error) {
-        console.log(error);
-      });
-    },
-   async handleDelete() {
-    // let data = {id: this.id}
-
-    axios.request({
-      method: 'delete',
-      url: 'http://localhost:3000/deletar',
-      // data: data
-      }).then(function (response) {
-        console.log(response.data);
-      }).catch(function (error) {
-        console.log(error);
-      });
-    },
-    mounted() {
-      this.handleEdit()
-      this.handleDelete()
-    }
+  },
+  mounted() {
+    this.handleGet();
   }
 }
 </script>
@@ -173,12 +138,17 @@ export default {
     justify-content: center;
     width: 0 auto;
     height: 40px auto;
-    margin-bottom: 50px;
+    margin: 130px 0;
   }
 
   #div-ul ul li {
     font-size: 30px;
     border-bottom: 1px solid #fff;
     margin: 10px;
+  }
+
+  .li-button {
+    background-color: white;
+    cursor: pointer;
   }
 </style>

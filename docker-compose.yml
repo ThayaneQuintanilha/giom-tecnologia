@@ -35,7 +35,7 @@ services:
     environment:
       MYSQL_USER: root
       MYSQL_PASSWORD: password
-      MYSQL_HOST: db # Nome do service logo abaixo
+      MYSQL_HOST: giom_db # Nome do service logo abaixo
       PORT: '3000'
       HOST: giom
     networks:
