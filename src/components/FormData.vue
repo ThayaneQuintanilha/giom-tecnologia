@@ -1,33 +1,54 @@
 <template>
-  <form id="form">
+  <form id="form" @submit.prevent="handleSubmit">
     <h1>Formulário de inscrição GIOM</h1>
     <div id="div-label">
-      <label class="label-form" for="">Nome
-        <input type="text" id="nome" name="name" v-model="nome" placeholder="Digite o seu nome">
+      <label class="label-form" for="" placeholder="Digite seu nome">Nome
+        <input v-model="nome">
       </label>
 
-      <label class="label-form" for="">Sobrenome
-        <input type="text" id="nome" name="name" v-model="sobrenome" placeholder="Digite o seu sobrenome">
+      <label class="label-form" for="" placeholder="Digite seu sobrenome">Sobrenome
+        <input v-model="sobrenome">
       </label>
 
-      <label class="label-form" for="">E-mail
-        <input type="text" id="nome" name="name" v-model="email" placeholder="Digite o seu e-mail">
+      <label class="label-form" for="" placeholder="Digite seu e-mail">E-mail
+        <input v-model="email">
       </label>
 
-      <label class="label-form" for="">CPF
-        <input type="number" id="cpf" name="cpf" v-model="cpf" placeholder="Digite o seu CPF">
+      <label class="label-form" for="" placeholder="Digite seu endereço">Endereço
+        <input v-model="endereco">
       </label>
-    </div>
-    <div id="btn">
-      <button type="submit">Enviar</button>
+
+      <div id="btn">
+        <button type="submit">Enviar</button>
+      </div>
     </div>
   </form>
+  <div id="div-ul">
+    <ul>
+      <li v-for="item in itens" :key="item.id">{{ item.nome }} - {{ item.sobrenome }} - {{ item.email }} - {{ item.endereco }}</li>
+    </ul>
+  </div>
 </template>
 
 <script>
-  export default {
-    name: 'FormData',
+export default {
+  data() {
+    return {
+      id: 1,
+      nome: '',
+      sobrenome: '',
+      email: '',
+      endereco: '',
+      itens: []
+    }
+  },
+  methods: {
+    handleSubmit() {
+      this.itens.push({nome: this.nome, sobrenome: this.sobrenome, email: this.email, endereco: this.endereco});
+      this.nome = '', this.sobrenome = '', this.email = '', this.endereco = ''
+    }
   }
+}
 </script>
 
 <style scoped>
@@ -37,6 +58,7 @@
     box-sizing: border-box;
     text-decoration: none;
     background-color: #01001f;
+    list-style: none;
     font-family: 'Signika Negative', sans-serif;
   }
 
@@ -51,24 +73,27 @@
   }
 
   #form h1 {
-    margin: 0 0 30px 0;
+    margin: 0 0 50px 0;
+    font-size: 50px;
   }
 
   #div-label {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
   }
 
   .label-form {
     margin: 0 0 20px 0px;
     text-align: center;
-    font-size: 20px;
+    font-size: 25px;
   }
 
   .label-form input {
-    height: 40px;
-    width: 250px;
+    height: 60px;
+    width: 380px;
+    font-size: 25px;
     display: flex;
     justify-content: center;
     flex-direction: row;
@@ -78,11 +103,38 @@
   }
 
   #btn button {
-    width: 70px;
-    height: 30px;
     border: none;
     background-color: #005469;
-    color: #ffffff;
     border-radius: 5px;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 20px;
+    height: 50px;
+    width: 170px;
+  }
+
+  #div-ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    margin: -250px 0 0 40px;
+  }
+  
+  #div-ul ul {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid #fff;
+    width: 0 auto;
+    height: 40px auto;
+  }
+
+  #div-ul ul li {
+    margin: 0 20px;
+    font-size: 30px;
   }
 </style>
