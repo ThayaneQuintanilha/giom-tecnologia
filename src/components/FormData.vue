@@ -25,12 +25,16 @@
   </form>
   <div id="div-ul">
     <ul>
-      <li v-for="item in itens" :key="item.id">{{ item.nome }} | {{ item.sobrenome }} | {{ item.email }} | {{ item.endereco }}</li>
+      <li v-for="item in itens" :key="item.id">{{ item.nome }} | {{ item.sobrenome }} | {{ item.email }} | {{ item.endereco }} 
+        <button type="button" v-for="item in itens" :key="item.id" @submit.prevent="handleEdit">Editar</button> 
+        <button type="button" v-for="item in itens" :key="item.id" @submit.prevent="handleDelete">Excluir</button></li>
     </ul>
   </div>
 </template>
 
 <script>
+const axios = require('axios');
+
 export default {
   data() {
     return {
@@ -43,9 +47,48 @@ export default {
     }
   },
   methods: {
-    handleSubmit() {
+    async handleSubmit() {
       this.itens.push({nome: this.nome, sobrenome: this.sobrenome, email: this.email, endereco: this.endereco});
       this.nome = '', this.sobrenome = '', this.email = '', this.endereco = ''
+
+      axios.request({
+        method: 'post',
+        url: 'http://localhost:3000/register'
+        }).then(function (response) {
+          console.log(response.data);
+        }).catch(function (error) {
+          console.log(error);
+        });
+    },
+   async handleEdit() {
+    // let data = {nome: this.nome, sobrenome: this.sobrenome, email: this.email, endereco: this.endereco}
+
+    axios.request({
+      method: 'put',
+      url: 'http://localhost:3000/atualizar',
+      // body: data
+      }).then(function (response) {
+        console.log(response.data);
+      }).catch(function (error) {
+        console.log(error);
+      });
+    },
+   async handleDelete() {
+    // let data = {id: this.id}
+
+    axios.request({
+      method: 'delete',
+      url: 'http://localhost:3000/deletar',
+      // data: data
+      }).then(function (response) {
+        console.log(response.data);
+      }).catch(function (error) {
+        console.log(error);
+      });
+    },
+    mounted() {
+      this.handleEdit()
+      this.handleDelete()
     }
   }
 }
