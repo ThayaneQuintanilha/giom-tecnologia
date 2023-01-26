@@ -38,11 +38,5 @@ services:
       MYSQL_ROOT_PASSWORD: 'password'
     ports:
       - 3306:3306
-    networks:
-      - giom-tecnologia
     volumes:
       - ./backend/script.sql:/docker-entrypoint-initdb.d/script.sql
-
-networks:
-  giom-tecnologia:
-    driver: bridge
