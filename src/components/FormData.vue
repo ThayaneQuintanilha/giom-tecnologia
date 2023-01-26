@@ -19,16 +19,16 @@
       </label>
 
       <div id="btn">
-        <button type="submit">Enviar</button>
-        <button class="li-button" v-if="itemEditando" type="button" @submit.prevent="handleSave(itemEditando.id)">Salvar</button>
+        <button type="submit" v-if="!edit">Enviar</button>
+        <button class="li-button" v-if="edit" type="button"  @click="handleSaveEdit">Salvar</button>
       </div>
     </div>
   </form>
   <div id="div-ul">
     <ul>
       <li v-for="item in itens" :key="item.idinfos">{{ item.name }} | {{ item.lastName }} | {{ item.email }} | {{ item.adress }} 
-        <button class="li-button" type="button" @click="handleEdit(item)">Editar</button> 
-        <button class="li-button" type="button" @click="handleDelete(item.idinfos)">Excluir</button>
+        <button class="li-button" type="button" @click="handleEdit(item.idinfos)">Editar</button> 
+        <button class="li-button" type="submit" @click="handleDelete(item.idinfos)">Excluir</button>
       </li>
     </ul>
   </div>
@@ -44,15 +44,20 @@ export default {
       lastName: '',
       email: '',
       adress: '',
-      itens: []
+      itens: [],
+      edit: false,
+      saveEditId: 0,
   }},
   methods: {
-    handleGet () {
-      api.get('/buscar').then(({data}) => this.itens = data).catch((error) => console.log(error));
+    async handleGet () {
+      await api.get('/buscar').then(({data}) => this.itens = data).catch((error) => console.log(error));
     },
+
     handleSubmit() {
       let data = { name: this.name, lastName: this.lastName, email: this.email, adress: this.adress }
       console.log(data.name);
+
+      this.itens.push(data);
 
       api.post('/registrar', data).then(response => {
           console.log(response);
@@ -62,13 +67,44 @@ export default {
 
       this.name = '', this.lastName = '', this.email = '', this.adress = ''
     },
-    handleDelete(id) {
+
+    async handleSaveEdit() {
+      const id = this.saveEditId;
+      const data = { name: this.name, lastName: this.lastName, email: this.email, adress: this.adress }
+
+      api.put(`/atualizar/${id}`, data).then(response => {
+        console.log(response)
+      }).catch(error => {
+        console.log(error);
+      })
+
+      await this.handleGet();
+
+      this.edit = !this.edit;
+    },
+
+    handleEdit(id) {
+      this.saveEditId = id;
+      let data = this.itens.find((e) => e.idinfos === id);
+
+      this.name = data.name;
+      this.lastName = data.lastName;
+      this.email = data.email;
+      this.adress = data.adress;
+
+      this.edit = !this.edit;
+    },
+
+    async handleDelete(id) {
+      console.log(id);
       api.delete(`/deletar/${id}`).then(response => {
         console.log(response)
       }).catch(error => {
         console.log(error)
       })
-    }
+
+      await this.handleGet();
+    },
   },
   mounted() {
     this.handleGet();
