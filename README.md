@@ -1,24 +1,11 @@
 # giom-tecnologia
 
-## Project setup
+## Para executar o projeto
 ```
-npm install
+npm run install
+
+docker-compose up
+
 ```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+<p align="center"><img src="./frontend/assets/giom.png" /></p>
