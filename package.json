@@ -1,0 +1,21 @@
+{
+  "name": "giom-tecnologia",
+  "version": "1.0.0",
+  "description": "## Para executar o projeto",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "cd backend && npm install && cd ../frontend && npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThayaneQuintanilha/giom-tecnologia.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ThayaneQuintanilha/giom-tecnologia/issues"
+  },
+  "homepage": "https://github.com/ThayaneQuintanilha/giom-tecnologia#readme"
+}
