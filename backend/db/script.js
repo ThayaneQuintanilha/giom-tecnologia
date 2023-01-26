@@ -11,7 +11,7 @@ const insert = async (name, lastName, email, adress) => {
 
 const getAll = async () => {
   const [response] = await connection.execute(
-    'SELECT * FROM giom_tecnologia.infos',
+    'SELECT * FROM infos',
   );
 
   return response;

@@ -14,7 +14,7 @@
         <input v-model="email" required>
       </label>
 
-      <label class="label-form" for="" placeholder="Digite seu endereço">Endereço
+      <label class="label-form" for="" placeholder="Digite seu endereço">Cidade
         <input v-model="adress" required>
       </label>
 
@@ -24,6 +24,7 @@
       </div>
     </div>
   </form>
+  <!-- eslint-disable -->
   <div id="div-ul">
     <ul>
       <li v-for="item in itens" :key="item.idinfos">{{ item.name }} | {{ item.lastName }} | {{ item.email }} | {{ item.adress }} 
@@ -33,6 +34,7 @@
     </ul>
   </div>
 </template>
+<!-- eslint-enable -->
 
 <script>
 import api from '../utils/api'
@@ -201,7 +203,14 @@ export default {
   }
 
   .li-button {
-    background-color: white;
+    border: none;
+    background-color: #005469;
+    border-radius: 5px;
+    color: #ffffff;
     cursor: pointer;
+    font-size: 15px;
+    height: 35px;
+    margin: 0 2px;
+    width: 80px;
   }
 </style>

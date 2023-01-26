@@ -1,0 +1,10 @@
+USE giom_tecnologia;
+
+CREATE TABLE infos (
+  idinfos INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(255) NOT NULL,
+  lastName VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL UNIQUE,
+  adress VARCHAR(255) NOT NULL,
+  PRIMARY KEY (idinfos)
+);
